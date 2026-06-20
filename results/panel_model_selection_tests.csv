@@ -1,0 +1,3 @@
+Test,Statistic,P-value,Recommendation
+F-test (FE vs Pooled),14.191605940357112,1.1102230246251565e-16,Fixed Effects
+BP-LM (RE vs Pooled),190.89269073335777,0.0,Random Effects

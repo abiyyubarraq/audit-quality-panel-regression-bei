@@ -1,0 +1,9 @@
+Test Category,Statistic,P-value,Reject H0,Interpretation
+Normality (Shapiro-Wilk),0.9883192472774974,0.03890289809455188,True,"At α = 0.05, the data does NOT follow a normal distribution (p = 0.0389)"
+Normality (Kolmogorov-Smirnov),0.06208665677475311,0.274287627602785,False,"At α = 0.05, the data follows a normal distribution (p = 0.2743)"
+Normality (Jarque-Bera),3.9616912103287425,0.13795253459994347,False,"At α = 0.05, the data follows a normal distribution (p = 0.1380). Distribution is positively skewed (right tail) and light-tailed (platykurtic)."
+Heteroskedasticity (Breusch-Pagan),7.696413073802286,0.17377966601223824,False,"At α = 0.05, homoskedasticity holds (p = 0.1738). No evidence of heteroskedasticity."
+Heteroskedasticity (White),39.13524653356507,0.006413867005331741,True,"At α = 0.05, heteroskedasticity is detected (p = 0.0064). Consider using heteroskedasticity-robust standard errors."
+Autocorrelation (Durbin-Watson),0.8874092618848334,,True,Positive autocorrelation detected (DW = 0.8874 < 1.5). Residuals are positively correlated over time.
+Autocorrelation (Breusch-Godfrey),78.48721177246497,8.051779733011907e-19,True,"At α = 0.05, autocorrelation is detected up to lag 1 (p = 0.0000). Consider using robust standard errors clustered by entity."
+Multicollinearity (Max VIF),1.9785214769770139,,False,No multicollinearity

@@ -1,0 +1,4 @@
+Hypothesis,Variable,Description,Coefficient,Std_Error,t_statistic,p_value,Significance,Decision
+H1,ARL,Audit Report Lag → Audit Quality,0.2610913646818308,0.17284960610740388,1.510511771253884,0.13262829159359124,,Not Supported
+H2,FEE,Audit Fee → Audit Quality,-0.031078359915660728,0.06011088712578951,-0.5170171561538494,0.6057650965737142,,Not Supported
+H3,FO,Foreign Ownership → Audit Quality,-0.0808196799226175,0.2831751359686465,-0.28540528336345866,0.7756546781807794,,Not Supported
