@@ -1,0 +1,138 @@
+# Variable Definitions for Audit Quality Research
+# Indonesian Stock Exchange - Consumer Non-Cyclicals Sector (2021-2024)
+
+# Dependent Variable
+dependent_variable:
+  name: 'AQMS'
+  full_name: 'Audit Quality Measurement Score'
+  description: 'Measure of audit quality for the company'
+  type: 'continuous'
+  expected_range: [0, null]  # Adjust based on your actual measurement scale
+  unit: 'score'
+
+# Independent Variables
+independent_variables:
+  - name: 'ARL'
+    full_name: 'Audit Report Lag'
+    description: 'Number of days between fiscal year-end and audit report date'
+    type: 'continuous'
+    expected_range: [0, 365]
+    unit: 'days'
+    hypothesis: 'Negative relationship with audit quality'
+    log_transform: false
+    standardize: false
+
+  - name: 'FEE'
+    full_name: 'Audit Fee'
+    description: 'Total audit fees paid by the company'
+    type: 'continuous'
+    expected_range: [0, null]
+    unit: 'IDR (millions)'
+    hypothesis: 'Positive relationship with audit quality'
+    log_transform: true  # Recommended due to skewness
+    standardize: false
+    notes: 'Consider log transformation due to potential right-skewness'
+
+  - name: 'FO'
+    full_name: 'Foreign Ownership'
+    description: 'Percentage of company shares owned by foreign investors'
+    type: 'continuous'
+    expected_range: [0, 100]
+    unit: 'percentage'
+    hypothesis: 'Positive relationship with audit quality'
+    log_transform: false
+    standardize: false
+
+# Control Variables
+control_variables:
+  - name: 'SIZE'
+    full_name: 'Company Size'
+    description: 'Natural logarithm of total assets'
+    type: 'continuous'
+    expected_range: [0, null]
+    unit: 'log(total assets)'
+    hypothesis: 'Control for company size effects'
+    log_transform: false  # Already in log form
+    standardize: false
+    notes: 'Usually measured as ln(total assets)'
+
+  - name: 'ROA'
+    full_name: 'Return on Assets'
+    description: 'Net income divided by total assets'
+    type: 'continuous'
+    expected_range: [-100, 100]  # Can be negative for loss-making companies
+    unit: 'percentage'
+    hypothesis: 'Control for profitability effects'
+    log_transform: false
+    standardize: false
+    notes: 'Measure of company profitability'
+
+# Panel Structure
+panel_structure:
+  entity_variable: 'CODE'
+  entity_name: 'Company Identifier'
+  entity_description: 'Unique identifier for each company'
+
+  time_variable: 'YEAR'
+  time_name: 'Year'
+  time_description: 'Fiscal year of the observation'
+  time_periods: [2021, 2022, 2023, 2024]
+
+  sector: 'Consumer Non-Cyclicals'
+  exchange: 'Indonesian Stock Exchange (Bursa Efek Indonesia)'
+
+  panel_type: 'balanced'  # or 'unbalanced' - will be determined during data exploration
+  n_entities: null         # Will be determined from data
+  n_time_periods: 4
+  total_observations: null # n_entities * n_time_periods (for balanced panel)
+
+# Research Model
+regression_model:
+  formula: 'AQMS ~ ARL + FEE + FO + SIZE + ROA'
+  model_type: 'panel'
+  estimation_method: 'fixed_effects'  # Primary method
+
+  research_hypotheses:
+    H1: 'Audit Report Lag (ARL) has a significant negative effect on Audit Quality'
+    H2: 'Audit Fee (FEE) has a significant positive effect on Audit Quality'
+    H3: 'Foreign Ownership (FO) has a significant positive effect on Audit Quality'
+
+# Data Quality Checks
+data_validation:
+  required_columns:
+    - 'CODE'
+    - 'YEAR'
+    - 'AQMS'
+    - 'ARL'
+    - 'FEE'
+    - 'FO'
+    - 'SIZE'
+    - 'ROA'
+
+  range_checks:
+    ARL: [0, 365]
+    FO: [0, 100]
+    YEAR: [2021, 2024]
+
+  data_types:
+    CODE: 'string'
+    YEAR: 'integer'
+    AQMS: 'float'
+    ARL: 'integer'
+    FEE: 'float'
+    FO: 'float'
+    SIZE: 'float'
+    ROA: 'float'
+
+# Additional Metadata
+metadata:
+  project_title: 'Analysis of Audit Quality Determinants in Consumer Non-Cyclicals Sector'
+  research_period: '2021-2024'
+  data_source: 'Indonesian Stock Exchange (BEI)'
+  sector_classification: 'Consumer Non-Cyclicals'
+
+  notes:
+    - 'Panel data structure with multiple companies observed over 4 years'
+    - 'Fixed Effects model recommended to control for unobserved company characteristics'
+    - 'Consider robust standard errors if heteroskedasticity is detected'
+    - 'Log transformation of FEE variable recommended if distribution is right-skewed'

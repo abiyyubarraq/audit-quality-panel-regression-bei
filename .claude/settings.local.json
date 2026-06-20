@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python:*)",
+      "Bash(venvScriptspython.exe scriptsregenerate_json.py)",
+      "Bash(\"venv/Scripts/python.exe\" scripts/regenerate_json.py)",
+      "Bash(\"venv/Scripts/python.exe\":*)",
+      "Bash(cat:*)",
+      "Bash(\"venv/Scripts/python.exe\" notebooks/hausman_test_diagnostic.py)",
+      "Bash(\"../venv/Scripts/python.exe\" test_robust_hausman.py)"
+    ]
+  }
+}

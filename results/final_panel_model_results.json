@@ -1,0 +1,80 @@
+{
+  "model_type": "Fixed Effects (Clustered SEs)",
+  "n_observations": 252,
+  "n_entities": 63.0,
+  "r_squared": 0.02890655427936606,
+  "r_squared_within": 0.02890655427936606,
+  "r_squared_between": -2.1554574788457717,
+  "r_squared_overall": -2.069555522486916,
+  "f_statistic": 1.0954261942230197,
+  "f_pvalue": 0.3644646663182549,
+  "hausman_statistic": 39.64916072238514,
+  "hausman_pvalue": 1.7574871014058857e-07,
+  "coefficients": {
+    "ARL": 0.2610913646818308,
+    "FEE": -0.031078359915660728,
+    "FO": -0.0808196799226175,
+    "SIZE": -0.06914019524764926,
+    "ROA": -0.00018588105730243162
+  },
+  "std_errors": {
+    "ARL": 0.17284960610740388,
+    "FEE": 0.06011088712578951,
+    "FO": 0.2831751359686465,
+    "SIZE": 0.028884870805418808,
+    "ROA": 3.1927381848432764e-05
+  },
+  "pvalues": {
+    "ARL": 0.13262829159359124,
+    "FEE": 0.6057650965737142,
+    "FO": 0.7756546781807794,
+    "SIZE": 0.017687087208817065,
+    "ROA": 2.5439031769991516e-08
+  },
+  "hypothesis_results": [
+    {
+      "Hypothesis": "H1",
+      "Variable": "ARL",
+      "Description": "Audit Report Lag (ARL) \u2192 Audit Quality (AQMS)",
+      "Coefficient": 0.2610913646818308,
+      "Std_Error_Clustered": 0.17284960610740388,
+      "t_statistic": 1.510511771253884,
+      "p_value": 0.13262829159359124,
+      "CI_Lower": -0.07769386328868078,
+      "CI_Upper": 0.5998765926523424,
+      "Significance": "",
+      "Sig_Level": "Not significant",
+      "Decision": "Not Supported"
+    },
+    {
+      "Hypothesis": "H2",
+      "Variable": "FEE",
+      "Description": "Audit Fee (FEE) \u2192 Audit Quality (AQMS)",
+      "Coefficient": -0.031078359915660728,
+      "Std_Error_Clustered": 0.06011088712578951,
+      "t_statistic": -0.5170171561538494,
+      "p_value": 0.6057650965737142,
+      "CI_Lower": -0.14889569868220817,
+      "CI_Upper": 0.08673897885088672,
+      "Significance": "",
+      "Sig_Level": "Not significant",
+      "Decision": "Not Supported"
+    },
+    {
+      "Hypothesis": "H3",
+      "Variable": "FO",
+      "Description": "Foreign Ownership (FO) \u2192 Audit Quality (AQMS)",
+      "Coefficient": -0.0808196799226175,
+      "Std_Error_Clustered": 0.2831751359686465,
+      "t_statistic": -0.28540528336345866,
+      "p_value": 0.7756546781807794,
+      "CI_Lower": -0.6358429464211647,
+      "CI_Upper": 0.47420358657592965,
+      "Significance": "",
+      "Sig_Level": "Not significant",
+      "Decision": "Not Supported"
+    }
+  ],
+  "standard_errors_type": "Clustered by entity (company)",
+  "note": "All standard errors are clustered by entity to account for autocorrelation"
+}

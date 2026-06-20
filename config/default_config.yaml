@@ -1,0 +1,141 @@
+# Default Statistical Test Configuration for Audit Quality Analysis
+
+# General settings
+statistical_tests:
+  significance_level: 0.05  # Alpha level for all hypothesis tests
+
+  # Normality Testing
+  normality:
+    default_test: 'shapiro'  # Options: shapiro, ks, jarque_bera
+    run_all: true             # Run all normality tests for comprehensive analysis
+    tests:
+      shapiro:
+        description: 'Shapiro-Wilk Test - Best for small to medium samples'
+        recommended: true
+      ks:
+        description: 'Kolmogorov-Smirnov Test - General purpose test'
+        recommended: false
+      jarque_bera:
+        description: 'Jarque-Bera Test - Tests skewness and kurtosis'
+        recommended: true
+
+  # Heteroskedasticity Testing
+  heteroskedasticity:
+    default_test: 'breusch_pagan'  # Options: breusch_pagan, white, glejser
+    run_all: true                   # Run all heteroskedasticity tests
+    tests:
+      breusch_pagan:
+        description: 'Breusch-Pagan Test - Standard for panel data'
+        recommended: true
+      white:
+        description: 'White Test - More general, includes cross-products'
+        recommended: true
+      glejser:
+        description: 'Glejser Test - Regresses absolute residuals'
+        recommended: false
+
+  # Autocorrelation Testing
+  autocorrelation:
+    default_test: 'durbin_watson'   # Options: durbin_watson, breusch_godfrey
+    run_all: true                    # Run both tests
+    durbin_watson:
+      description: 'Durbin-Watson Test - Quick screening for first-order autocorrelation'
+      recommended: true
+      acceptable_range: [1.5, 2.5]   # Rule of thumb for DW statistic
+    breusch_godfrey:
+      description: 'Breusch-Godfrey LM Test - Tests higher-order autocorrelation'
+      recommended: true
+      default_lags: 1                # Number of lags to test
+
+  # Multicollinearity Testing
+  multicollinearity:
+    test: 'vif'                      # Variance Inflation Factor
+    vif_threshold: 10.0              # Standard threshold (VIF > 10 = problematic)
+    vif_conservative_threshold: 5.0  # Conservative threshold (VIF > 5 = concerning)
+    description: 'VIF < 5: Low | 5 <= VIF < 10: Moderate | VIF >= 10: High multicollinearity'
+
+# Panel Data Regression Settings
+panel_regression:
+  default_model: 'fixed_effects'  # Options: fixed_effects, random_effects
+
+  fixed_effects:
+    entity_effects: true   # Include company fixed effects
+    time_effects: false    # Include time (year) fixed effects
+    description: 'Controls for time-invariant company characteristics'
+
+  random_effects:
+    description: 'More efficient if unobserved effects are uncorrelated with predictors'
+
+  standard_errors:
+    robust_se: true        # Use heteroskedasticity-robust standard errors
+    clustered_se: false    # Cluster standard errors at entity level
+    cluster_variable: null # Variable to cluster on (if clustered_se is true)
+
+  hausman_test:
+    run_automatically: true           # Run Hausman test to choose between FE and RE
+    significance_level: 0.05          # Alpha for Hausman test
+    description: 'Tests whether Random Effects is consistent'
+
+# Visualization Settings
+visualization:
+  style: 'seaborn-v0_8-whitegrid'  # Matplotlib style
+  figure_size:
+    default: [10, 6]
+    large: [12, 8]
+    small: [8, 5]
+  dpi: 300                          # Resolution for saved figures
+  color_palette: 'Set2'             # Seaborn color palette
+  save_format: 'png'                # Format for saved figures
+  save_figures: true                # Automatically save figures
+  show_figures: true                # Display figures in notebook
+
+  # Plot-specific settings
+  residual_plots:
+    show_fitted_line: true
+    show_confidence_interval: true
+    alpha: 0.6                      # Transparency for scatter points
+
+  correlation_heatmap:
+    annot: true                     # Show correlation values
+    cmap: 'coolwarm'                # Color map
+    vmin: -1
+    vmax: 1
+
+# Data Processing Settings
+data_processing:
+  missing_values:
+    strategy: 'drop'                # Options: drop, mean, median, forward_fill, backward_fill
+    threshold: 0.05                 # Drop rows/columns with > 5% missing values
+
+  outlier_detection:
+    method: 'iqr'                   # Options: iqr, zscore
+    iqr_multiplier: 1.5             # For IQR method
+    zscore_threshold: 3.0           # For Z-score method
+
+  transformations:
+    log_transform_variables: []     # Variables to log-transform (e.g., ['FEE'])
+    standardize_variables: []       # Variables to standardize (mean=0, std=1)
+
+  validation:
+    check_missing: true
+    check_outliers: true
+    check_data_types: true
+    check_ranges: true
+
+# Logging Settings
+logging:
+  level: 'INFO'                     # Options: DEBUG, INFO, WARNING, ERROR, CRITICAL
+  format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+  log_to_file: true
+  log_file: 'logs/audit_analysis.log'
+  log_to_console: true
+
+# Output Settings
+output:
+  results_dir: 'results'
+  tables_dir: 'results/tables'
+  figures_dir: 'results/figures'
+  save_intermediate_results: true
+  export_formats:
+    tables: ['csv', 'txt']          # Export tables as CSV and TXT
+    figures: ['png']                # Export figures as PNG
