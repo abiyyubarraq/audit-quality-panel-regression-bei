@@ -24,7 +24,7 @@ Panel data regression analysis examining the impact of Audit Report Lag (ARL), A
 
 ## Project Structure
 ```
-audit-regression/
+audit-quality-panel-regression-bei/
 ├── data/                   # Data files
 │   ├── raw/               # Original Excel files
 │   ├── processed/         # Processed JSON/CSV
@@ -46,7 +46,8 @@ audit-regression/
 
 ### 1. Clone or Download the Repository
 ```bash
-cd d:\auditRegression\audit-regression
+git clone https://github.com/abiyyubarraq/audit-quality-panel-regression-bei.git
+cd audit-quality-panel-regression-bei
 ```
 
 ### 2. Create Virtual Environment (Recommended)
@@ -77,8 +78,8 @@ This repository is **self-contained** — everything needed to rerun the full an
 ### Steps
 ```bash
 # 1. Clone the repo
-git clone https://github.com/abiyyubarraq/audit-regression.git
-cd audit-regression
+git clone https://github.com/abiyyubarraq/audit-quality-panel-regression-bei.git
+cd audit-quality-panel-regression-bei
 
 # 2. Create + activate a virtual environment
 python -m venv venv
