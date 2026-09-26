@@ -95,3 +95,11 @@ Thumbs.db
 .pytest_cache/
 .coverage
 htmlcov/
+
+# Local AI tooling and secrets: never commit these.
+.claude/
+.mcp.json
+.env
+.env.*
+!.env.example
+!.env.*.example
